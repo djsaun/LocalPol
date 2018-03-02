@@ -5,15 +5,12 @@ import { bindActionCreators } from 'redux';
 import { getData, getVotingInfo } from '../actions/actionCreators';
 
 const Header = props => (
-      
-
-      <header>
-        <button onClick={props.getData}>Get Elections</button>
-        <button onClick={props.getVotingInfo}>Get Voter Info</button>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/list">List</NavLink>
-      </header>
-
+  <header>
+    <button onClick={props.getData}>Get Elections</button>
+    <button onClick={props.getVotingInfo}>Get Voter Info</button>
+    <NavLink to="/">Home</NavLink>
+    <NavLink to="/representatives">Representatives</NavLink>
+  </header>
 )
 
 const mapStateToProps = state => ({
