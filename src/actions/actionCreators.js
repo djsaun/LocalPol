@@ -7,6 +7,7 @@ export const GET_REP_INFO = 'GET_REP_INFO';
 export const GET_REP_INFO_FAILED = 'GET_REP_INFO_FAILED';
 export const GET_DIVISION_INFO = 'GET_DIVISION_INFO';
 export const GET_DIVISION_INFO_FAILED = 'GET_DIVISION_INFO_FAILED';
+export const GET_RESULTS_BY_ADDRESS = 'GET_RESULTS_BY_ADDRESS'
 
 export function getData() {
   return dispatch => {
@@ -31,6 +32,23 @@ export function getData() {
         });
       });
   }
+}
+
+export function getResultsByAddress() {
+  return dispatch => {
+    const voterInfoUrl = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=1411%20Norwalk%20Ln.%20Austin%20TX&electionId=2000`;
+    const repsUrl = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=1411%20Norwalk%20Ln.%20Austin%20TX&levels=country`;
+    axios.all([
+      axios.get(voterInfoUrl),
+      axios.get(repsUrl)
+    ])
+    .then(axios.spread((voterInfoRes, repsRes) => {
+      dispatch({
+        type: GET_RESULTS_BY_ADDRESS,
+        payload: [voterInfoRes, repsRes]
+      })
+    })
+  )}
 }
 
 export function getVotingInfo() {
@@ -91,12 +109,10 @@ export function getReps() {
     axios.get(url)
       .then(function (response) {
         console.log("response is", response);
-
         dispatch({
           type: GET_REP_INFO,
           payload: response.data
         });
-
       })
       .catch(function (error) {
         console.log(error);
