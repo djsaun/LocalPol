@@ -1,8 +1,9 @@
 import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getReps } from '../actions/actionCreators'
+import { getReps, getDivisionID } from '../actions/actionCreators'
 
-const Representatives = ({dispatch}) => {
+const Representatives = props => {
   let repForm
   let address
   let city
@@ -11,9 +12,9 @@ const Representatives = ({dispatch}) => {
 
   function submitRepForm(e) {
     e.preventDefault();
-    console.log('test')
-    dispatch(getReps())
-    repForm.reset()
+    // props.getDivisionID();
+    props.getReps();
+    repForm.reset();
   }
 
   return (
@@ -32,7 +33,14 @@ const Representatives = ({dispatch}) => {
 };
 
 const mapStateToProps = state => ({
-  Data: state.getReps
+  Data: state.getData,
+  test: 'test',
+  stuff: state.getReps
 })
 
-export default connect(mapStateToProps)(Representatives);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getDivisionID,
+  getReps
+}, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Representatives);
