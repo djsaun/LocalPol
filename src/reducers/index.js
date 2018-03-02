@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-import books from './books'
+import getData from './books'
 
 export default combineReducers({
   routing: routerReducer,
-  books
+  getData
 })
