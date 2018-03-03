@@ -14,7 +14,7 @@ const Local = props => {
 
   function submitRepForm(e) {
     e.preventDefault();
-    props.getResultsByAddress()
+    props.getResultsByAddress(address.value, city.value, state.value, zip.value)
     repForm.reset();
   }
   if (props.data.local_data) {
