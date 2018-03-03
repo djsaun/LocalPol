@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import Header from './Header'
 import Home from './Home'
 import NotFound from './NotFound'
-import Representatives from './Representatives';
+import Local from './Local';
 
 const App = () => (
   <div>
@@ -12,7 +12,7 @@ const App = () => (
     <main>
       <Switch>
         <Route exact path="/" component={Home}/>
-        <Route exact path="/representatives" component={Representatives} />
+        <Route exact path="/local" component={Local} />
         <Route component={NotFound} />
       </Switch>
     </main>

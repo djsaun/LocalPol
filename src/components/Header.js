@@ -9,7 +9,7 @@ const Header = props => (
     <button onClick={props.getData}>Get Elections</button>
     <button onClick={props.getVotingInfo}>Get Voter Info</button>
     <NavLink to="/">Home</NavLink>
-    <NavLink to="/representatives">Representatives</NavLink>
+    <NavLink to="/local">Local</NavLink>
   </header>
 )
 

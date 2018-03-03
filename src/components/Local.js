@@ -2,20 +2,24 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { getReps, getDivisionID, getResultsByAddress } from '../actions/actionCreators'
+import Reps from './Reps'
 
-const Representatives = props => {
+const Local = props => {
   let repForm
   let address
   let city
   let state
   let zip
+  let representative
 
   function submitRepForm(e) {
     e.preventDefault();
-    // props.getDivisionID();
-    // props.getReps();
     props.getResultsByAddress()
     repForm.reset();
+  }
+  if (props.data.local_data) {
+    representative = <Reps />
+    console.log(props.data.local_data.address.address)
   }
 
   return (
@@ -29,13 +33,15 @@ const Representatives = props => {
         <input type="text" placeholder="Zip" ref={(input) => {zip = input}} />
         <button type="submit">Enter</button>
       </form>
+
+      {representative}
+
     </div>
   )
 };
 
 const mapStateToProps = state => ({
-  Data: state.getData,
-  test: 'test',
+  data: state.getData,
   stuff: state.getReps
 })
 
@@ -45,4 +51,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   getResultsByAddress
 }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Representatives);
+export default connect(mapStateToProps, mapDispatchToProps)(Local);
