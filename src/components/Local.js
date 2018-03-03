@@ -10,16 +10,22 @@ const Local = props => {
   let city
   let state
   let zip
-  let representative
+  let level
+  let representatives
 
   function submitRepForm(e) {
     e.preventDefault();
-    props.getResultsByAddress(address.value, city.value, state.value, zip.value)
+    console.log(level.value)
+    props.getResultsByAddress(address.value, city.value, state.value, zip.value, level.value)
     repForm.reset();
   }
+
   if (props.data.local_data) {
-    representative = <Reps />
-    console.log(props.data.local_data.address.address)
+    if (props.data.local_data.representatives.offices || props.data.local_data.representatives.officials) {
+      representatives = <Reps />
+    } else {
+      representatives = 'No results have been found. Please try another search.'
+    }
   }
 
   return (
@@ -31,11 +37,16 @@ const Local = props => {
         <input type="text" placeholder="City" ref={(input) => { city = input }} />
         <input type="text" placeholder="State" ref={(input) => { state = input }} />
         <input type="text" placeholder="Zip" ref={(input) => {zip = input}} />
+        <select name="level" id="level" ref={(select) => { level = select }}>
+          <option value="country">Country</option>
+          <option value="international">International</option>
+          <option value="locality">Locality</option>
+          <option value="regional">Regional</option>
+        </select>
         <button type="submit">Enter</button>
       </form>
 
-      {representative}
-
+      {representatives}
     </div>
   )
 };
