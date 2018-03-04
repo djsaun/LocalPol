@@ -34,13 +34,17 @@ export function getData() {
   }
 }
 
+function useNull() {
+  return null;
+}
+
 export function getResultsByAddress(address, city, state, zip, level) {
   return dispatch => {
     const voterInfoUrl = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=1411%20Norwalk%20Ln.%20Austin%20TX&electionId=2000`;
     const repsUrl = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=${address}${city}${state}${zip}&levels=${level}`;
     axios.all([
-      axios.get(voterInfoUrl),
-      axios.get(repsUrl)
+      axios.request(voterInfoUrl).catch(useNull),
+      axios.request(repsUrl).catch(useNull)
     ])
     .then(axios.spread((voterInfoRes, repsRes) => {
       dispatch({
