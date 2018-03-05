@@ -1,8 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getReps, getDivisionID, getResultsByAddress } from '../actions/actionCreators'
+import { getResultsByAddress } from '../actions/actionCreators'
 import Reps from './Reps'
+import Elections from './Elections'
 
 const Home = props => {
   let repForm
@@ -15,7 +16,8 @@ const Home = props => {
 
   function submitRepForm(e) {
     e.preventDefault();
-    props.getResultsByAddress(address.value, city.value, state.value, zip.value, level.value)
+    props.getResultsByAddress(address.value, city.value, state.value, zip.value, level.value);
+    repForm.reset();
   }
 
   return (
@@ -37,19 +39,18 @@ const Home = props => {
       </form>
 
       {(props.data.representatives) ? <Reps /> : ''} 
+      {(props.data.local_elections) ? <Elections /> : ''}
+      
       
     </div>
   )
 };
 
 const mapStateToProps = state => ({
-  data: state.getData,
-  stuff: state.getReps
+  data: state.getData
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getDivisionID,
-  getReps,
   getResultsByAddress
 }, dispatch)
 

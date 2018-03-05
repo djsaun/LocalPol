@@ -1,7 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getReps, getDivisionID, getResultsByAddress } from '../actions/actionCreators'
+import { getResultsByAddress } from '../actions/actionCreators'
 
 const Reps = props => {
 
@@ -47,8 +47,6 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  getDivisionID,
-  getReps,
   getResultsByAddress
 }, dispatch)
 
