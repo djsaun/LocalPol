@@ -1,5 +1,50 @@
 @import '_variables.css';
 
-body {
-  background: $green;
+form {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+  grid-gap: 30px;
+  max-width: 800px;
+  overflow: hidden;
+  
+  .form-group {
+    position: relative;
+
+    label {
+      position: absolute;
+      top: 10px;
+      left: 5px;
+      font-size: 14px;
+      transition: all .25s ease;
+      pointer-events: none;
+    }
+
+    input {
+      padding: 10px 10px 10px 5px;
+      font-size: 18px;
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid $green;
+      outline: none;
+
+      &:active, &:focus, &:valid {
+        ~ label {
+          top: -20px;
+          color: $green;
+        }
+      }
+    }
+  }
+
+  select {
+    grid-column: 1 / -1;
+    border: 1px solid $green;
+  }
+
+  button {
+    padding: 10px 25px;
+    justify-self: center;
+    grid-column: 1 / -1;
+  }
 }

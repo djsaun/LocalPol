@@ -31,6 +31,7 @@
     "jest": "20.0.4",
     "object-assign": "4.1.1",
     "postcss-color-function": "^4.0.1",
+    "postcss-compact-mq": "^0.2.1",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-import": "^11.1.0",
     "postcss-initial": "^2.0.0",

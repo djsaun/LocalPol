@@ -174,6 +174,7 @@ module.exports = {
                   ident: 'postcss',
                   plugins: () => [
                     require('postcss-import'),
+                    require('postcss-compact-mq'),
                     require('postcss-nested'),
                     require('postcss-simple-vars'),
                     require('postcss-flexbugs-fixes'),

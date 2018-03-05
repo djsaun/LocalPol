@@ -9,9 +9,6 @@ import './index.css'
 
 const target = document.querySelector('#root');
 
-console.log(process.env)
-
-
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>

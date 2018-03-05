@@ -5,6 +5,7 @@ import { getData } from '../actions/actionCreators';
 
 const Header = props => (
   <header>
+    'The header will go here'
   </header>
 )
 

@@ -21,18 +21,24 @@ const Home = props => {
 
   return (
     <div>
-      <p>Please enter your address to retrieve a list of your current representatives.</p>
-
       <form ref={(form) => { repForm = form; }} onSubmit={submitRepForm}>
-        <label htmlFor="address">Address</label>
-        <input type="text" id="address" placeholder="Address" ref={(input) => { address = input }} required />
-        <label htmlFor="city">City</label>
-        <input type="text" id="city" placeholder="City" ref={(input) => { city = input }} required />
-        <label htmlFor="state">State</label>
-        <input type="text" id="state" placeholder="State" ref={(input) => { state = input }} required />
-        <label htmlFor="zip">Zip</label>
-        <input type="text" id="zip" placeholder="Zip" ref={(input) => {zip = input}} required />
-        <select name="level" id="level" ref={(select) => { level = select }}>
+        <div className="form-group">
+          <input type="text" id="address" ref={(input) => { address = input }} required />
+          <label htmlFor="address">Address</label>
+        </div>
+        <div className="form-group">
+          <input type="text" id="city" ref={(input) => { city = input }} required />
+          <label htmlFor="city">City</label>
+        </div>
+        <div className="form-group">
+          <input type="text" id="state" ref={(input) => { state = input }} required />
+          <label htmlFor="state">State</label>
+        </div>
+        <div className="form-group">
+          <input type="text" id="zip" ref={(input) => {zip = input}} required />
+          <label htmlFor="zip">Zip</label>
+        </div>
+        <select name="level" id="level" className="full-width" ref={(select) => { level = select }}>
           <option value="country">Country</option>
           <option value="international">International</option>
           <option value="locality">Locality</option>
@@ -43,7 +49,6 @@ const Home = props => {
 
       {(props.data.representatives) ? <Reps /> : ''} 
       {(props.data.local_elections) ? <Elections /> : ''}
-      
       
     </div>
   )

@@ -1,6 +1,14 @@
 @import '_variables.css';
 
-main {
+.container {
   margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
   max-width: 1200px;
+  width: 100%;
+
+  @media <=768px {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
