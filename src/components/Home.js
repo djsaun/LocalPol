@@ -15,17 +15,7 @@ const Home = props => {
 
   function submitRepForm(e) {
     e.preventDefault();
-    console.log(level.value)
     props.getResultsByAddress(address.value, city.value, state.value, zip.value, level.value)
-    repForm.reset();
-  }
-
-  if (props.data.local_data) {
-    if (props.data.local_data.representatives.offices || props.data.local_data.representatives.officials) {
-      representatives = <Reps />
-    } else {
-      representatives = 'No results have been found. Please try another search.'
-    }
   }
 
   return (
@@ -46,7 +36,8 @@ const Home = props => {
         <button type="submit">Enter</button>
       </form>
 
-      {representatives}
+      {(props.data.representatives) ? <Reps /> : ''} 
+      
     </div>
   )
 };

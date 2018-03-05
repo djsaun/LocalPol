@@ -5,13 +5,13 @@ import { getReps, getDivisionID, getResultsByAddress } from '../actions/actionCr
 
 const Reps = props => {
 
-  const rep = props.data.local_data.representatives.officials;
+  const rep = props.data.representatives.officials;
   
   return(
     <div>
       <h3>Representatives</h3>
       {
-        props.data.local_data.representatives.offices.map((office, i) => 
+        props.data.representatives.offices.map((office, i) => 
 
         <div key={i}>
 
