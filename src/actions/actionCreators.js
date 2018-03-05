@@ -104,7 +104,7 @@ export function getReps(address, city, state, zip, level) {
         console.log("response is", response);
         dispatch({
           type: GET_REP_INFO,
-          payload: response.data
+          payload: [response.data, level]
         });
       })
       .catch(function (error) {

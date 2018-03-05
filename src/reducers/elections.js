@@ -29,11 +29,13 @@ function getData(state=[], action) {
         }
       }
     case GET_REP_INFO:
+    console.log(action.payload)
       return {
         ...state,
         representatives: {
-          offices: action.payload.offices,
-          officials: action.payload.officials,
+          offices: action.payload[0].offices,
+          officials: action.payload[0].officials,
+          level: action.payload[1],
           error: false,
           error_message: 'No results have been found. Please try another search.'
         }

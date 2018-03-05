@@ -7,7 +7,6 @@ const RepsList = props => {
 
   return (
     <div>
-      <h3>Representatives</h3>
       {
         props.data.representatives.offices.map((office, i) =>
 

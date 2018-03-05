@@ -10,6 +10,7 @@ const Reps = props => {
     <div>
       {(!props.data.representatives.offices) ? props.data.representatives.error_message :
         <div className="representatives-section">
+          <h3>Your {props.data.representatives.level} Representatives</h3>
           <RepsList />
         </div>
       }  
