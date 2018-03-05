@@ -1,0 +1,27 @@
+@import '_variables.css';
+
+.representatives {
+  display: grid;
+  grid-gap: 20px;
+  
+  .representative {
+    border: 2px solid gray;
+    
+    img {
+      width: auto;
+      height: 250px;
+    }
+
+    &:not(:first-of-type) {
+      margin-top: 20px;
+    }
+
+    &.republican {
+      border-color: $red;
+    }
+    
+    &.democratic {
+      border-color: $blue;
+    }
+  }
+}

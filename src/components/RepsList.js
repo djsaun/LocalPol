@@ -6,17 +6,17 @@ const RepsList = props => {
   const rep = props.data.representatives.officials;
 
   return (
-    <div>
+    <div className="representatives">
       {
         props.data.representatives.offices.map((office, i) =>
 
-          <div key={i}>
+          <div key={i} className="representative-content">
 
             <h4>{office.name}</h4>
 
             {office.officialIndices.map((index) =>
-              <div key={index}>
-                <img width="100" height="100" src={rep[index].photoUrl} alt={rep[index].name} />
+              <div key={index} className={`representative ${(rep[index].party).toLowerCase()}`}>
+                <img src={rep[index].photoUrl} alt={rep[index].name} />
                 <h5>{rep[index].name} - {rep[index].party}</h5>
                 <div className="contact">
                   <div className="address">

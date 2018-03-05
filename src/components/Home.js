@@ -16,7 +16,6 @@ const Home = props => {
   function submitRepForm(e) {
     e.preventDefault();
     props.getResultsByAddress(address.value, city.value, state.value, zip.value, level.value);
-    repForm.reset();
   }
 
   return (
@@ -54,7 +53,7 @@ const Home = props => {
         <button type="submit">Enter</button>
       </form>
 
-      <div className="primary">
+      <div className="primary container">
         {(props.data.representatives) ? <Reps /> : ''} 
         {(props.data.local_elections) ? <Elections /> : ''}
       </div>
