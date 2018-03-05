@@ -1,4 +1,4 @@
-import { GET_DATA, GET_VOTING_INFO, GET_REP_INFO, GET_DIVISION_INFO, GET_RESULTS_BY_ADDRESS, GET_VOTING_INFO_FAILED } from '../actions/actionCreators'
+import { GET_DATA, GET_VOTING_INFO, GET_REP_INFO, GET_DIVISION_INFO, GET_RESULTS_BY_ADDRESS, GET_VOTING_INFO_FAILED, GET_REP_INFO_FAILED } from '../actions/actionCreators'
 
 function getData(state=[], action) {
   switch (action.type) {
@@ -32,9 +32,18 @@ function getData(state=[], action) {
         ...state,
         representatives: {
           offices: action.payload.offices,
-          officials: action.payload.officials
+          officials: action.payload.officials,
+          error: false
         }
       }
+    case GET_REP_INFO_FAILED:
+      return {
+        ...state,
+        representatives: {
+          error: true,
+          error_message: 'No results have been found. Please try another search.'
+        }
+    }
     case GET_DIVISION_INFO:
       // console.log(action.payload)
       return {

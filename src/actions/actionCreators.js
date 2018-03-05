@@ -35,7 +35,7 @@ export function getData() {
   }
 }
 
-function getVotingInfo(address, city, state, zip) {
+export function getVotingInfo(address, city, state, zip) {
   return dispatch => {
     const url = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=${address}${city}${state}${zip}`;
     axios.get(url)
@@ -63,6 +63,7 @@ function getVotingInfo(address, city, state, zip) {
 export function getResultsByAddress(address, city, state, zip, level) {
   return dispatch => {
     
+    dispatch(getReps(address, city, state, zip, level))
     dispatch(getVotingInfo(address, city, state, zip));
     
   } 
@@ -95,9 +96,9 @@ export function getDivisionID() {
 }
 
 
-export function getReps() {
+export function getReps(address, city, state, zip, level) {
   return dispatch => {
-    const url = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=1411%20Norwalk%20Ln.%20Austin%20TX&levels=country`;
+    const url = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=${address}${city}${state}${zip}&levels=${level}`;
     axios.get(url)
       .then(function (response) {
         console.log("response is", response);
