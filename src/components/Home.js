@@ -25,10 +25,14 @@ const Home = props => {
       <p>Please enter your address to retrieve a list of your current representatives.</p>
 
       <form ref={(form) => { repForm = form; }} onSubmit={submitRepForm}>
-        <input type="text" placeholder="Address" ref={(input) => { address = input }} required />
-        <input type="text" placeholder="City" ref={(input) => { city = input }} required />
-        <input type="text" placeholder="State" ref={(input) => { state = input }} required />
-        <input type="text" placeholder="Zip" ref={(input) => {zip = input}} required />
+        <label htmlFor="address">Address</label>
+        <input type="text" id="address" placeholder="Address" ref={(input) => { address = input }} required />
+        <label htmlFor="city">City</label>
+        <input type="text" id="city" placeholder="City" ref={(input) => { city = input }} required />
+        <label htmlFor="state">State</label>
+        <input type="text" id="state" placeholder="State" ref={(input) => { state = input }} required />
+        <label htmlFor="zip">Zip</label>
+        <input type="text" id="zip" placeholder="Zip" ref={(input) => {zip = input}} required />
         <select name="level" id="level" ref={(select) => { level = select }}>
           <option value="country">Country</option>
           <option value="international">International</option>
