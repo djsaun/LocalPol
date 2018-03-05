@@ -38,11 +38,18 @@ const Home = props => {
           <input type="text" id="zip" ref={(input) => {zip = input}} required />
           <label htmlFor="zip">Zip</label>
         </div>
-        <select name="level" id="level" className="full-width" ref={(select) => { level = select }}>
+        <label>Level of Representation</label>
+        <select name="level" id="level" className="full-width" ref={(select) => { level = select }} required>
+          <option value="">Please choose a level of representation</option>
+          <option value="administrativeArea1">Administrative Area 1</option>
+          <option value="administrativeArea2">Administrative Area 2</option>
           <option value="country">Country</option>
-          <option value="international">International</option>
           <option value="locality">Locality</option>
+          <option value="international">International</option>
           <option value="regional">Regional</option>
+          <option value="special">Special</option>
+          <option value="subLocality1">Sub Locality 1</option>
+          <option value="subLocality2">Sub Locality 2</option>
         </select>
         <button type="submit">Enter</button>
       </form>
