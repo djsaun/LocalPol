@@ -47,9 +47,11 @@ const Home = props => {
         <button type="submit">Enter</button>
       </form>
 
-      {(props.data.representatives) ? <Reps /> : ''} 
-      {(props.data.local_elections) ? <Elections /> : ''}
-      
+      <div className="primary">
+        {(props.data.representatives) ? <Reps /> : ''} 
+        {(props.data.local_elections) ? <Elections /> : ''}
+      </div>
+
     </div>
   )
 };

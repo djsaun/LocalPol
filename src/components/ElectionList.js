@@ -4,7 +4,12 @@ import { connect } from 'react-redux'
 const ElectionList = props => {
   return (
     <div>
-      'election list'
+      <h3>Upcoming Elections</h3>
+
+      <div className="election">
+        <h5>{props.data.local_elections.election.name}</h5>
+        <p>Date: {props.data.local_elections.election.electionDay}</p>
+      </div>
     </div>
   )
 }

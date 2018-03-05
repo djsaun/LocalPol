@@ -16,7 +16,8 @@ function getData(state=[], action) {
           election: action.payload.election,
           locations: action.payload.pollingLocations,
           contests: action.payload.contests,
-          error: false
+          error: false,
+          error_message: 'There are no upcoming elections in your area.'
         }
       }
     case GET_VOTING_INFO_FAILED:
@@ -33,7 +34,8 @@ function getData(state=[], action) {
         representatives: {
           offices: action.payload.offices,
           officials: action.payload.officials,
-          error: false
+          error: false,
+          error_message: 'No results have been found. Please try another search.'
         }
       }
     case GET_REP_INFO_FAILED:
