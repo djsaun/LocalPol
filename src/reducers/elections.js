@@ -1,4 +1,4 @@
-import { GET_DATA, GET_VOTING_INFO, GET_REP_INFO, GET_DIVISION_INFO, GET_RESULTS_BY_ADDRESS } from '../actions/actionCreators'
+import { GET_DATA, GET_VOTING_INFO, GET_REP_INFO, GET_DIVISION_INFO, GET_RESULTS_BY_ADDRESS, GET_VOTING_INFO_FAILED } from '../actions/actionCreators'
 
 function getData(state=[], action) {
   switch (action.type) {
@@ -15,7 +15,16 @@ function getData(state=[], action) {
         local_elections: {
           election: action.payload.election,
           locations: action.payload.pollingLocations,
-          contests: action.payload.contests
+          contests: action.payload.contests,
+          error: false
+        }
+      }
+    case GET_VOTING_INFO_FAILED:
+      return {
+        ...state,
+        local_elections: {
+          error: true,
+          error_message: 'There are no upcoming elections in your area.'
         }
       }
     case GET_REP_INFO:
@@ -44,7 +53,8 @@ function getData(state=[], action) {
           },
           representatives: {
             offices: action.payload[1].data.offices,
-            officials: action.payload[1].data.officials
+            officials: action.payload[1].data.officials,
+            error: false
           },
           voting_info: {
             election: action.payload[0].data.election,

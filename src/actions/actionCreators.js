@@ -8,6 +8,7 @@ export const GET_REP_INFO_FAILED = 'GET_REP_INFO_FAILED';
 export const GET_DIVISION_INFO = 'GET_DIVISION_INFO';
 export const GET_DIVISION_INFO_FAILED = 'GET_DIVISION_INFO_FAILED';
 export const GET_RESULTS_BY_ADDRESS = 'GET_RESULTS_BY_ADDRESS'
+export const GET_RESULTS_BY_ADDRESS_FAILED = 'GET_RESULTS_BY_ADDRESS_FAILED'
 
 export function getData() {
   return dispatch => {
@@ -34,30 +35,9 @@ export function getData() {
   }
 }
 
-function useNull() {
-  return null;
-}
-
-export function getResultsByAddress(address, city, state, zip, level) {
+function getVotingInfo(address, city, state, zip) {
   return dispatch => {
-    const voterInfoUrl = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=1411%20Norwalk%20Ln.%20Austin%20TX&electionId=2000`;
-    const repsUrl = `https://www.googleapis.com/civicinfo/v2/representatives?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=${address}${city}${state}${zip}&levels=${level}`;
-    axios.all([
-      axios.request(voterInfoUrl).catch(useNull),
-      axios.request(repsUrl).catch(useNull)
-    ])
-    .then(axios.spread((voterInfoRes, repsRes) => {
-      dispatch({
-        type: GET_RESULTS_BY_ADDRESS,
-        payload: [voterInfoRes, repsRes]
-      })
-    })
-  )}
-}
-
-export function getVotingInfo() {
-  return dispatch => {
-    const url = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=1411%20Norwalk%20Ln.%20Austin%20TX&electionId=2000`;
+    const url = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=${address}${city}${state}${zip}`;
     axios.get(url)
       .then(function (response) {
         console.log("response is", response);
@@ -78,6 +58,14 @@ export function getVotingInfo() {
         });
       });
   }
+}
+
+export function getResultsByAddress(address, city, state, zip, level) {
+  return dispatch => {
+    
+    dispatch(getVotingInfo(address, city, state, zip));
+    
+  } 
 }
 
 // Need to get Divisions by address and then query representatives endpoint with the division id 
