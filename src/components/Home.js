@@ -12,7 +12,6 @@ const Home = props => {
   let state
   let zip
   let level
-  let representatives
 
   function submitRepForm(e) {
     e.preventDefault();

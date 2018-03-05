@@ -3,9 +3,10 @@ import { Route, Switch } from 'react-router-dom'
 import Header from './Header'
 import Home from './Home'
 import NotFound from './NotFound'
+import '../styles/App.css'
 
 const App = () => (
-  <div>
+  <div className="App">
     <Header />
 
     <main>
