@@ -7,8 +7,8 @@ export const GET_REP_INFO = 'GET_REP_INFO';
 export const GET_REP_INFO_FAILED = 'GET_REP_INFO_FAILED';
 export const GET_DIVISION_INFO = 'GET_DIVISION_INFO';
 export const GET_DIVISION_INFO_FAILED = 'GET_DIVISION_INFO_FAILED';
-export const GET_ADDRESS = 'GET_ADDRESS'
-export const GET_ADDRESS_FAILED = 'GET_ADDRESS_FAILED'
+export const GET_RESULTS_BY_ADDRESS = 'GET_RESULTS_BY_ADDRESS'
+export const GET_RESULTS_BY_ADDRESS_FAILED = 'GET_RESULTS_BY_ADDRESS_FAILED'
 
 export function getData() {
   return dispatch => {
