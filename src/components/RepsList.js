@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 const RepsList = props => {
 
   const rep = props.data.representatives.officials;
+  let channel
 
   return (
     <div className="representatives">
@@ -26,8 +27,15 @@ const RepsList = props => {
                   <p>{rep[index].phones}</p>
                 </div>
                 <div className="social">
-                  Facebook
-                  Twitter
+                  {
+                    rep[index].channels && rep[index].channels.map((channel, i) => {
+                      if (channel.type === 'Facebook' || channel.type==='Twitter') {
+                        return (
+                          <a href={`https://${(channel.type).toLowerCase()}.com/${channel.id}`} key={i} target="_blank">{channel.type}</a>
+                        )
+                      }
+                    })
+                  }
                 </div>
               </div>,
             )}
