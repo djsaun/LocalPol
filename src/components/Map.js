@@ -1,9 +1,20 @@
 import React from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
-const pollLocationMap = withScriptjs(withGoogleMap((props) =>
+function test() {
+  return 'test';
+}
 
-  <GoogleMap></GoogleMap>
+const Map = withScriptjs(withGoogleMap((props) =>
+
+  <div>
+    {console.log(test())}
+    <GoogleMap 
+      defaultZoom={8}
+      defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    />
+  </div>
+
 ))
 
-export default pollLocationMap;
+export default Map;
