@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 const RepsList = props => {
 
   const rep = props.data.representatives.officials;
-  let channel
 
   return (
     <div className="representatives">
