@@ -9,6 +9,8 @@ export const GET_DIVISION_INFO = 'GET_DIVISION_INFO';
 export const GET_DIVISION_INFO_FAILED = 'GET_DIVISION_INFO_FAILED';
 export const GET_RESULTS_BY_ADDRESS = 'GET_RESULTS_BY_ADDRESS'
 export const GET_RESULTS_BY_ADDRESS_FAILED = 'GET_RESULTS_BY_ADDRESS_FAILED'
+export const GET_COORDINATES = 'GET_COORDINATES'
+export const GET_COORDINATES_FAILED = 'GET_COORDINATES_FAILED'
 
 export function getData() {
   return dispatch => {
@@ -37,7 +39,7 @@ export function getData() {
 
 export function getVotingInfo(address, city, state, zip) {
   return dispatch => {
-    const url = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=${address}${city}${state}${zip}`;
+    const url = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=${address}${city}${state}${zip}&electionId=2000`;
     axios.get(url)
       .then(function (response) {
         console.log("response is", response);
@@ -60,11 +62,37 @@ export function getVotingInfo(address, city, state, zip) {
   }
 }
 
+export function getCoordinates(address, city, state, zip) {
+  return dispatch => {
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}${city}${state}${zip}&key=${process.env.REACT_APP_JS_KEY}`
+    axios.get(url)
+      .then(function (response) {
+        console.log("response is", response);
+
+        dispatch({
+          type: GET_COORDINATES,
+          payload: response.data
+        });
+
+      })
+      .catch(function (error) {
+        console.log(error);
+        // You can dispatch here error 
+        // Example
+        dispatch({
+          type: GET_COORDINATES_FAILED,
+          payload: error
+        });
+      });
+  }
+}
+
 export function getResultsByAddress(address, city, state, zip, level) {
   return dispatch => {
     
     dispatch(getReps(address, city, state, zip, level))
     dispatch(getVotingInfo(address, city, state, zip));
+    dispatch(getCoordinates(address, city, state, zip))
     
   } 
 }
