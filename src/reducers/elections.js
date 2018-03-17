@@ -1,4 +1,4 @@
-import { GET_DATA, GET_VOTING_INFO, GET_REP_INFO, GET_DIVISION_INFO, GET_RESULTS_BY_ADDRESS, GET_VOTING_INFO_FAILED, GET_REP_INFO_FAILED, GET_COORDINATES } from '../actions/actionCreators'
+import { GET_DATA, GET_VOTING_INFO, GET_REP_INFO, GET_DIVISION_INFO, GET_RESULTS_BY_ADDRESS, GET_VOTING_INFO_FAILED, GET_REP_INFO_FAILED, GET_COORDINATES, GET_POLL_COORDINATES } from '../actions/actionCreators'
 
 function getData(state=[], action) {
   switch (action.type) {
@@ -10,6 +10,7 @@ function getData(state=[], action) {
         }
       };
     case GET_VOTING_INFO:
+      console.log(action.payload.pollingLocations);
       return {
         ...state,
         local_elections: {
@@ -80,7 +81,17 @@ function getData(state=[], action) {
         ...state,
         coordinates: {
           lat: action.payload.results[0].geometry.location.lat,
-          lng: action.payload.results[0].geometry.location.lng
+          lng: action.payload.results[0].geometry.location.lng,
+          error: false
+        }
+      }
+    case GET_POLL_COORDINATES: 
+      console.log('poll coordinates', action.payload)
+      return {
+        ...state,
+        local_elections: {
+          ...state.local_elections,
+          location_coordinates: action.payload[0].data.results
         }
       }
     default:

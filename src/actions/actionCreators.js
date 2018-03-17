@@ -11,6 +11,7 @@ export const GET_RESULTS_BY_ADDRESS = 'GET_RESULTS_BY_ADDRESS'
 export const GET_RESULTS_BY_ADDRESS_FAILED = 'GET_RESULTS_BY_ADDRESS_FAILED'
 export const GET_COORDINATES = 'GET_COORDINATES'
 export const GET_COORDINATES_FAILED = 'GET_COORDINATES_FAILED'
+export const GET_POLL_COORDINATES = 'GET_POLL_COORDINATES'
 
 export function getData() {
   return dispatch => {
@@ -42,14 +43,34 @@ export function getVotingInfo(address, city, state, zip) {
     const url = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${process.env.REACT_APP_CIVIC_INFO_KEY}&address=${address}${city}${state}${zip}&electionId=2000`;
     axios.get(url)
       .then(function (response) {
-        console.log("response is", response);
 
         dispatch({
           type: GET_VOTING_INFO,
           payload: response.data
         });
 
+        const pollsArr = [];
+
+        const pollingLocations = response.data.pollingLocations.slice(0, 4)
+
+        for (let i = 0; i < pollingLocations.length; i++) {
+          const pollingLocationData = response.data.pollingLocations[i].address;
+
+          pollsArr.push(axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${pollingLocationData.line1}${pollingLocationData.city}${pollingLocationData.state}${pollingLocationData.zip}&key=${process.env.REACT_APP_JS_KEY}`));
+        }
+
+        return axios.all(pollsArr);
       })
+        .then((res) => {
+          console.log('state?', state)
+          console.log('maybe geocoding?', res)
+
+          dispatch({
+            type: GET_POLL_COORDINATES,
+            payload: res
+          })
+          
+        })
       .catch(function (error) {
         console.log(error);
         // You can dispatch here error 
