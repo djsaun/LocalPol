@@ -9,7 +9,21 @@ const Map = withScriptjs(withGoogleMap((props) =>
       defaultZoom={12}
       defaultCenter={{ lat: props.data.coordinates.lat, lng: props.data.coordinates.lng }}
     />
-    {props.isMarkerShown && <Marker position={{ lat: props.data.coordinates.lat, lng: props.data.coordinates.lng }} />}
+
+    {props.data.local_elections.location_coordinates.map((coordinates, i)=> {
+
+      const lat = coordinates.geometry.location.lat;
+      const lng = coordinates.geometry.location.lng;
+      const locationName = props.data.local_elections.locations[i].address.locationName;
+
+      return (
+        <Marker
+          key={{i}}
+          position={{lat, lng}}
+          title={locationName}
+        />
+      )
+    })}
   </div>
 
 ))

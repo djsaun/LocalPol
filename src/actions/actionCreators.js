@@ -62,8 +62,6 @@ export function getVotingInfo(address, city, state, zip) {
         return axios.all(pollsArr);
       })
         .then((res) => {
-          console.log('state?', state)
-          console.log('maybe geocoding?', res)
 
           dispatch({
             type: GET_POLL_COORDINATES,
